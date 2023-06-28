@@ -1,0 +1,21 @@
+<launch>
+    <!-- Arguments -->
+    <arg name="open_rviz"           default="true"/>
+    <arg name="run_local_map_node"  default="true"/>
+    <arg name="run_global_map_node" default="true"/>
+
+    <!-- Rviz -->
+    <group if="$(arg open_rviz)">
+        <node type="rviz" name="rviz" pkg="rviz" args="-d $(find mapping)/rviz/mapping.rviz" />
+    </group>
+
+    <!-- local_map_node -->
+    <group if="$(arg run_local_map_node)">
+        <node name="local_map_node" pkg="mapping" type="local_map_node" output="screen"/>
+    </group>
+
+    <!-- global_map_node -->
+    <group if="$(arg run_global_map_node)">
+        <node name="global_map_node" pkg="mapping" type="global_map_node" output="screen"/>
+    </group>
+</launch>
